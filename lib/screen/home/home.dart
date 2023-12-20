@@ -5,6 +5,7 @@ import 'package:photo_gallery/model/imageModel/image_model.dart';
 import 'package:photo_gallery/provider/login_provider.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:photo_gallery/screen/home/image_card.dart';
+import 'package:photo_gallery/screen/home/no_data_widget.dart';
 
 class Home extends ConsumerStatefulWidget {
   const Home({super.key});
@@ -59,6 +60,14 @@ class _HomeState extends ConsumerState<Home> {
           itemBuilder: (context, item, index) => ImageCard(
             imageModel: item,
           ),
+          firstPageErrorIndicatorBuilder: (context) {
+            return NoDataWidget(
+              title: "Something went wrong!",
+              onRetry: () {
+                imageController.getData();
+              },
+            );
+          },
         ),
       ),
     );

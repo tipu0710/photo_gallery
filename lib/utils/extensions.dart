@@ -17,18 +17,4 @@ extension ChangeUrl on String {
     List<String> list = url.split("/");
     return "${ApiService.baseUrl}/id/${list[4]}/${height ?? 300}/${width ?? 200}";
   }
-
-  getPath() {
-    String url = this;
-    url = url.replaceAll(ApiService.baseUrl, "");
-    url = url.replaceAll(ApiService.baseUrl, "");
-    url = url.replaceFirst(RegExp(r"\?[^]*"), "");
-    return url;
-  }
-
-  getUrlId() {
-    String url = this;
-    var list = url.split("/");
-    return list.last;
-  }
 }

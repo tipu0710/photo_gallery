@@ -8,7 +8,7 @@ mixin ApiService {
   final Dio _dio = Dio()
     ..options = BaseOptions(
       baseUrl: baseUrl,
-      connectTimeout: const Duration(minutes: 1),
+      connectTimeout: const Duration(seconds: 60),
     );
 
   static String baseUrl = "https://picsum.photos";
