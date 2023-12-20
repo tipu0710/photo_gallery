@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:photo_gallery/provider/login_provider.dart';
 import 'package:photo_gallery/screen/home/home.dart';
 import 'package:photo_gallery/screen/login/login_screen.dart';
-import 'package:photo_gallery/utils/global.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
@@ -18,7 +17,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    shownSplash = true;
     Future.delayed(const Duration(seconds: 2), () async {
       if (mounted) {
         var login = ref.read(loginProvider.notifier).isLogin;

@@ -103,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         emailFocus.unfocus();
                         passwordFocus.unfocus();
                         if (_formKey.currentState?.validate() == true) {
-                          ref.read(loginProvider.notifier).login();
+                          ref.read(loginProvider.notifier).login(context);
                         }
                       },
                       style: ElevatedButton.styleFrom(
