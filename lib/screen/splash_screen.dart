@@ -1,24 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:photo_gallery/provider/login_provider.dart';
 import 'package:photo_gallery/screen/home/home.dart';
-class SplashScreen extends StatefulWidget {
+import 'package:photo_gallery/screen/login/login_screen.dart';
+import 'package:photo_gallery/utils/global.dart';
+
+class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
 
   static const String routeLocation = "/splash";
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  ConsumerState<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2), () {
+    shownSplash = true;
+    Future.delayed(const Duration(seconds: 2), () async {
       if (mounted) {
+        var login = ref.read(loginProvider.notifier).isLogin;
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-              builder: (context) => const Home(),
+              builder: (context) => login ? const Home() : const LoginScreen(),
             ),
             (route) => false);
       }
@@ -29,39 +36,11 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: SizedBox(
-          width: 150,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Hero(
-                tag: "splashLogo",
-                child: Image.asset(
-                  "assets/images/logo.png",
-                  width: 170,
-                ),
-              ),
-              const SizedBox(height: 13),
-              const Text(
-                'Login to Photo Gallery',
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Color(0xffffffff),
-                  letterSpacing: 0.6,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const Text(
-                'Unveil Moments, Embrace the Unexpected!',
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Color(0xffffffff),
-                  letterSpacing: 0.6,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ],
+        child: Hero(
+          tag: "splashLogo",
+          child: Image.asset(
+            "assets/images/logo.png",
+            width: 170,
           ),
         ),
       ),
